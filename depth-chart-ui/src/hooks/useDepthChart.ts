@@ -34,7 +34,7 @@ function createEmptyDepthChart(): DepthChartState {
 
 export function useDepthChart(): UseDepthChartResult {
   const [depthChart, setDepthChart] = useState<DepthChartState | null>(null);
-  const [originalChart, setOriginalChart] = useState<string>('');
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -54,13 +54,13 @@ export function useDepthChart(): UseDepthChartResult {
 
         const data = await response.json();
         setDepthChart(data.depthChart);
-        setOriginalChart(JSON.stringify(data.depthChart));
+        setHasUnsavedChanges(false);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
         // Initialize with empty chart on error
         const empty = createEmptyDepthChart();
         setDepthChart(empty);
-        setOriginalChart(JSON.stringify(empty));
+        setHasUnsavedChanges(false);
       } finally {
         setLoading(false);
       }
@@ -108,6 +108,7 @@ export function useDepthChart(): UseDepthChartResult {
           positions: newPositions,
         };
       });
+      setHasUnsavedChanges(true);
     },
     []
   );
@@ -128,6 +129,7 @@ export function useDepthChart(): UseDepthChartResult {
         },
       };
     });
+    setHasUnsavedChanges(true);
   }, []);
 
   // Save depth chart to server
@@ -149,8 +151,7 @@ export function useDepthChart(): UseDepthChartResult {
         throw new Error('Failed to save depth chart');
       }
 
-      // Update original to track changes
-      setOriginalChart(JSON.stringify(depthChart));
+      setHasUnsavedChanges(false);
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save');
@@ -177,11 +178,6 @@ export function useDepthChart(): UseDepthChartResult {
 
     return ids;
   }, [depthChart]);
-
-  // Check if there are unsaved changes
-  const hasUnsavedChanges = depthChart
-    ? JSON.stringify(depthChart) !== originalChart
-    : false;
 
   return {
     depthChart,
