@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Papa from 'papaparse';
-import { POSITIONS } from '../shared/constants.ts';
+import { POSITIONS } from '../src/shared/constants';
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3001', 10);

@@ -1,7 +1,9 @@
-import { POSITIONS, PositionName } from '../shared/constants';
+import { POSITIONS } from '../shared/constants';
+import type { PositionName } from '../shared/constants';
 
 // Re-export for convenience
-export { POSITIONS, PositionName };
+export { POSITIONS };
+export type { PositionName };
 
 // Player data from scored CSV
 export interface Player {
