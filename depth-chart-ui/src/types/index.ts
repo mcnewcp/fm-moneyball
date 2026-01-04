@@ -5,6 +5,7 @@ export interface Player {
   position: string;
   bestPos: string;
   age: number;
+  type: string;
   scores: Record<string, number>; // Position name -> score
 }
 

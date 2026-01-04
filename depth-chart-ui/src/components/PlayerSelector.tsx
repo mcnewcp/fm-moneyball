@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { Player, PositionName, Tier } from '../types';
+import { getContractBadge } from '../utils/contractUtils';
 
 interface PlayerSelectorProps {
   isOpen: boolean;
@@ -98,19 +99,31 @@ export function PlayerSelector({
             <div className="no-players">No available players</div>
           ) : (
             <div className="player-list">
-              {sortedPlayers.map((player) => (
-                <button
-                  key={player.uid}
-                  className="player-option"
-                  onClick={() => onSelect(player.uid)}
-                >
-                  <span className="player-score">
-                    {player.scores[position]?.toFixed(1) ?? '-'}
-                  </span>
-                  <span className="player-name">{player.name}</span>
-                  <span className="player-age">Age: {player.age}</span>
-                </button>
-              ))}
+              {sortedPlayers.map((player) => {
+                const contractBadge = getContractBadge(player.type);
+
+                return (
+                  <button
+                    key={player.uid}
+                    className="player-option"
+                    onClick={() => onSelect(player.uid)}
+                  >
+                    <span className="player-score">
+                      {player.scores[position]?.toFixed(1) ?? '-'}
+                    </span>
+                    <span className="player-name">
+                      {player.name}
+                      {contractBadge && (
+                        <span className="contract-type-label">
+                          ({contractBadge.fullText})
+                        </span>
+                      )}
+                    </span>
+                    <span className="player-age">Age: {player.age}</span>
+                    <span className="player-best-pos">Best: {player.bestPos}</span>
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

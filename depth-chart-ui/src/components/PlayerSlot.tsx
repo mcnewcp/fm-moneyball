@@ -1,6 +1,7 @@
 import type { Player, Tier } from '../types';
 import { getScoreColor } from '../utils/colorUtils';
 import { getAgeBadge, getAgeCategory } from '../utils/ageUtils';
+import { getContractBadge } from '../utils/contractUtils';
 
 interface PlayerSlotProps {
   player: Player | null;
@@ -29,6 +30,7 @@ export function PlayerSlot({
     : 'var(--bg-card)';
   const ageBadge = player ? getAgeBadge(player.age) : null;
   const ageCategory = player ? getAgeCategory(player.age) : '';
+  const contractBadge = player ? getContractBadge(player.type) : null;
 
   return (
     <button
@@ -41,6 +43,14 @@ export function PlayerSlot({
         <>
           <span className="player-score">{score?.toFixed(1) ?? '-'}</span>
           <span className="player-name">{player.name}</span>
+          {contractBadge && (
+            <span
+              className={`contract-badge ${contractBadge.className}`}
+              title={contractBadge.fullText}
+            >
+              {contractBadge.label}
+            </span>
+          )}
           {ageBadge && (
             <span className={`age-badge ${ageBadge.className}`} title={ageCategory}>
               {ageBadge.label}

@@ -308,6 +308,48 @@ body {
   color: #fff;
 }
 
+/* Contract type badge - left of age badge (side-by-side) */
+.contract-badge {
+  position: absolute;
+  top: -1px;
+  right: 13px;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Trial: orange - uncertain future */
+.contract-badge-trial {
+  background: #e67e22;
+}
+
+/* Loan: blue - temporary player */
+.contract-badge-loan {
+  background: #3498db;
+}
+
+/* Contract type label in PlayerSelector modal */
+.contract-type-label {
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-left: var(--spacing-xs);
+  font-style: italic;
+}
+
+/* Best position in PlayerSelector modal */
+.player-best-pos {
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-left: var(--spacing-xs);
+}
+
 .player-score {
   min-width: 32px;
   font-weight: 600;
@@ -345,7 +387,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   width: 90%;
-  max-width: 400px;
+  max-width: 550px;
   max-height: 70vh;
   display: flex;
   flex-direction: column;

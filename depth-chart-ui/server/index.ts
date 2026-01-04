@@ -42,6 +42,7 @@ interface RawPlayerRow {
   Position: string;
   'Best Pos': string;
   Age: string;
+  Type: string;
   [key: string]: string;
 }
 
@@ -51,6 +52,7 @@ interface Player {
   position: string;
   bestPos: string;
   age: number;
+  type: string;
   scores: Record<string, number>;
 }
 
@@ -104,6 +106,7 @@ function parseSquadCSV(filePath: string): Player[] {
       position: row.Position,
       bestPos: row['Best Pos'],
       age: parseInt(row.Age, 10) || 0,
+      type: row.Type || 'Full Contract',
       scores,
     };
   });
