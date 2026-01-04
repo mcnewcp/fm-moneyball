@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Papa from 'papaparse';
+import { POSITIONS } from '../shared/constants.ts';
 
 const app = express();
 const PORT = 3001;
@@ -20,21 +21,6 @@ app.use(express.json());
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const SQUAD_DIR = path.join(ROOT_DIR, 'output/squad');
 const DEPTH_CHART_DIR = path.join(ROOT_DIR, 'output/depth-chart');
-
-// Role score column names
-const POSITION_COLUMNS = [
-  'SK-At',
-  'BPD-De',
-  'CD-Co',
-  'IWB-Su',
-  'IWB-De',
-  'DM-Su',
-  'CM-At',
-  'MEZ-Su',
-  'IW-Su',
-  'W-At',
-  'P-At',
-];
 
 interface RawPlayerRow {
   UID: string;
@@ -93,7 +79,7 @@ function parseSquadCSV(filePath: string): Player[] {
   return result.data.map((row) => {
     const scores: Record<string, number> = {};
 
-    for (const pos of POSITION_COLUMNS) {
+    for (const pos of POSITIONS) {
       const value = row[pos];
       if (value && value !== '-' && value !== '') {
         scores[pos] = parseFloat(value);
@@ -159,7 +145,7 @@ app.get('/api/depth-chart', (req: Request, res: Response) => {
         createdAt: null,
         squadFile: null,
         positions: Object.fromEntries(
-          POSITION_COLUMNS.map((pos) => [
+          POSITIONS.map((pos) => [
             pos,
             {
               first: { playerId: null },

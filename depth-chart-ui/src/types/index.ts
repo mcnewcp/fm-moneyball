@@ -1,3 +1,8 @@
+import { POSITIONS, PositionName } from '../shared/constants';
+
+// Re-export for convenience
+export { POSITIONS, PositionName };
+
 // Player data from scored CSV
 export interface Player {
   uid: string;
@@ -28,23 +33,6 @@ export interface DepthChartState {
   squadFile: string;
   positions: Record<string, DepthChartPosition>;
 }
-
-// The 11 positions in our formation
-export const POSITIONS = [
-  'SK-At',
-  'BPD-De',
-  'CD-Co',
-  'IWB-Su',
-  'IWB-De',
-  'DM-Su',
-  'CM-At',
-  'MEZ-Su',
-  'IW-Su',
-  'W-At',
-  'P-At',
-] as const;
-
-export type PositionName = (typeof POSITIONS)[number];
 
 // Position layout configuration for the field grid
 export interface PositionLayoutConfig {
