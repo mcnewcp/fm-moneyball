@@ -34,12 +34,6 @@ export function getScoreRangeFromScores(scores: number[]): { min: number; max: n
     return { min: 0, max: 20 };
   }
 
-  if (validScores.length === 1) {
-    // Single player - use a range around their score
-    const score = validScores[0];
-    return { min: Math.max(0, score - 3), max: Math.min(20, score + 3) };
-  }
-
   return {
     min: Math.min(...validScores),
     max: Math.max(...validScores),
