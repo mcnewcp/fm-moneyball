@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { Player } from '../types';
 
 interface SquadDataResponse {
@@ -21,7 +21,7 @@ export function useSquadData(): UseSquadDataResult {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSquad = async () => {
+  const fetchSquad = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -42,11 +42,11 @@ export function useSquadData(): UseSquadDataResult {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchSquad();
-  }, []);
+  }, [fetchSquad]);
 
   return {
     players,
