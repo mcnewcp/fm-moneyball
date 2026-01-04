@@ -7,7 +7,7 @@ import Papa from 'papaparse';
 import { POSITIONS } from '../shared/constants.ts';
 
 const app = express();
-const PORT = 3001;
+const PORT = parseInt(process.env.PORT || '3001', 10);
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
