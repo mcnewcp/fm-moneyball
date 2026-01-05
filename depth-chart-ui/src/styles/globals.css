@@ -1,0 +1,528 @@
+/* CSS Variables - Dark Mode Theme (VS Code inspired) */
+:root {
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #252526;
+  --bg-card: #2d2d2d;
+  --bg-hover: #3c3c3c;
+  --text-primary: #d4d4d4;
+  --text-secondary: #808080;
+  --text-muted: #6a6a6a;
+  --border-color: #3c3c3c;
+  --border-light: #454545;
+  --accent: #569cd6;
+  --accent-hover: #6cb6ff;
+  --success: #4ec9b0;
+  --error: #f44747;
+  --warning: #dcdcaa;
+
+  /* Score gradient colors */
+  --score-red: #f44336;
+  --score-green: #4caf50;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Font */
+  --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html,
+body {
+  height: 100%;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+#root {
+  height: 100%;
+}
+
+/* App Container */
+.app-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--spacing-md);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error State */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--spacing-sm);
+  text-align: center;
+}
+
+.error h2 {
+  color: var(--error);
+}
+
+.error-hint {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+/* Depth Chart Container */
+.depth-chart-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Header */
+.depth-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.depth-chart-header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.save-message {
+  font-size: 12px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.save-message.success {
+  color: var(--success);
+  background: rgba(78, 201, 176, 0.1);
+}
+
+.save-message.error {
+  color: var(--error);
+  background: rgba(244, 71, 71, 0.1);
+}
+
+.save-button {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--border-light);
+}
+
+.save-button.has-changes {
+  background: var(--accent);
+  color: var(--bg-primary);
+  border-color: var(--accent);
+}
+
+.save-button.has-changes:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Field Grid Layout */
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, auto);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: linear-gradient(180deg, #1a2a1a 0%, #152515 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Position Card */
+.position-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 160px;
+  justify-self: center;
+}
+
+.position-header {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  text-align: center;
+  padding: 2px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
+}
+
+.position-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Player Slot */
+.player-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-align: left;
+  width: 100%;
+  min-height: 20px;
+}
+
+.player-slot:hover {
+  filter: brightness(1.1);
+}
+
+.player-slot.empty {
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+}
+
+.player-slot.empty:hover {
+  border-color: var(--accent);
+}
+
+/* Filled slot - neutral border */
+.player-slot.filled {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+/* Age badge - corner indicator */
+.age-badge {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 0 var(--radius-sm) 0 var(--radius-sm);
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Young (≤20): white - youth potential */
+.age-badge-young {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Developing (21-25): light gray - growing */
+.age-badge-developing {
+  background: #b0b0b0;
+  color: #000;
+}
+
+/* Prime (26-30): dark gray - peak years */
+.age-badge-prime {
+  background: #606060;
+  color: #fff;
+}
+
+/* Veteran (>30): black - experienced */
+.age-badge-veteran {
+  background: #202020;
+  color: #fff;
+}
+
+/* Contract type badge - left of age badge (side-by-side) */
+.contract-badge {
+  position: absolute;
+  top: -1px;
+  right: 13px;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Trial: orange - uncertain future */
+.contract-badge-trial {
+  background: #e67e22;
+}
+
+/* Loan: blue - temporary player */
+.contract-badge-loan {
+  background: #3498db;
+}
+
+/* Contract type label in PlayerSelector modal */
+.contract-type-label {
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-left: var(--spacing-xs);
+  font-style: italic;
+}
+
+/* Best position in PlayerSelector modal */
+.player-best-pos {
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-left: var(--spacing-xs);
+}
+
+.player-score {
+  min-width: 32px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+}
+
+.player-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.empty-label {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 550px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.modal-close:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-sm);
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.player-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-align: left;
+  width: 100%;
+}
+
+.player-option:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+}
+
+.player-option .player-score {
+  min-width: 40px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.player-option .player-name {
+  flex: 1;
+  color: var(--text-primary);
+}
+
+.player-option .player-age {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.player-option.clear-option {
+  border-color: var(--error);
+  background: rgba(244, 71, 71, 0.1);
+}
+
+.player-option.clear-option:hover {
+  background: rgba(244, 71, 71, 0.2);
+}
+
+.player-option.clear-option .player-name {
+  color: var(--error);
+}
+
+.no-players {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+}
+
+/* Footer */
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--spacing-md);
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-light);
+}

@@ -15,6 +15,8 @@ output/squad/*
 !output/squad/.gitkeep
 output/shortlist/*
 !output/shortlist/.gitkeep
+output/depth-chart/*
+!output/depth-chart/.gitkeep
 
 # Python
 __pycache__/
@@ -43,6 +45,9 @@ wheels/
 venv/
 ENV/
 env/
+
+# Node.js
+node_modules/
 
 # IDE
 .vscode/
